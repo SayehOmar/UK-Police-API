@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/UK Police API" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>

@@ -25,17 +25,232 @@
     <widget class="QgsCheckableComboBox" name="mComboBox">
      <item>
       <property name="text">
-       <string>omar </string>
+       <string>Select All </string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>sayeh </string>
+       <string>Avon and Somerset Constabulary</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>malek</string>
+       <string>Bedfordshire Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>British Transport Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Cambridgeshire Constabulary</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Cheshire Constabulary</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>City of London Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Cleveland Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Cumbria Constabulary</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Derbyshire Constabulary</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Devon and  Cornwall Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Dorset Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Durham Constabulary</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Dyfed-Powys Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Essex Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Gloucestershire Constabulary</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Greater Manchester Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Gwent Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Hampshire Constabulary</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Hertfordshire Constabulary</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Humberside Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Kent Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Lancashire Constabulary</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Leicestershire Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Lincolnshire Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Merseyside Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Metropolitan Police Service</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Norfolk Constabulary</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>North Wales Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>North Yorkshire Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Northamptonshire Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Northumbria Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Nottinghamshire Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Police Service of Northern Ireland</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>South Wales Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>South Yorkshire Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Staffordshire Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Suffolk Constabulary</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Surrey Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Sussex Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Thames Valley Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Warwickshire Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>West Mercia Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>West Midlands Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>West Yorkshire Police</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Wiltshire Police</string>
       </property>
      </item>
     </widget>

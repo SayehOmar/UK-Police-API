@@ -44,8 +44,10 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
 
-        self.BB_calcul.clicked.connect(self.on_calcul)
+        # self.BB_calcul.clicked.connect(self.on_calcul)
 
+
+"""
     def on_calcul(self):
         # Get the values from the spin boxes
         Value_A = self.SB1.value()
@@ -56,3 +58,4 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
         # Call the calcul method to get the result
         result = calc.calcul()
         print(f"results:{result}")
+"""

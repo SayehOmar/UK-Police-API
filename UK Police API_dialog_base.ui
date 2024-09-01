@@ -6,263 +6,486 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>667</width>
-    <height>491</height>
+    <width>609</width>
+    <height>584</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>UK Police API</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0">
-    <widget class="QDateEdit" name="dateEdit_2">
-     <property name="displayFormat">
-      <string>MM/yyyy</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QgsCheckableComboBox" name="mComboBox">
-     <item>
-      <property name="text">
-       <string>Select All </string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Avon and Somerset Constabulary</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Bedfordshire Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>British Transport Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Cambridgeshire Constabulary</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Cheshire Constabulary</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>City of London Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Cleveland Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Cumbria Constabulary</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Derbyshire Constabulary</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Devon and  Cornwall Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Dorset Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Durham Constabulary</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Dyfed-Powys Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Essex Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Gloucestershire Constabulary</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Greater Manchester Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Gwent Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Hampshire Constabulary</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Hertfordshire Constabulary</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Humberside Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Kent Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Lancashire Constabulary</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Leicestershire Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Lincolnshire Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Merseyside Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Metropolitan Police Service</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Norfolk Constabulary</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>North Wales Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>North Yorkshire Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Northamptonshire Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Northumbria Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Nottinghamshire Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Police Service of Northern Ireland</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>South Wales Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>South Yorkshire Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Staffordshire Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Suffolk Constabulary</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Surrey Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Sussex Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Thames Valley Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Warwickshire Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>West Mercia Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>West Midlands Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>West Yorkshire Police</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Wiltshire Police</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QDateEdit" name="dateEdit">
-     <property name="displayFormat">
-      <string>MM/yyyy</string>
-     </property>
-    </widget>
-   </item>
    <item row="3" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="5" column="0">
+       <widget class="Line" name="line">
+        <property name="lineWidth">
+         <number>4</number>
+        </property>
+        <property name="midLineWidth">
+         <number>4</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="Line" name="line_2">
+        <property name="lineWidth">
+         <number>4</number>
+        </property>
+        <property name="midLineWidth">
+         <number>4</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QProgressBar" name="progressBar">
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="7" column="0">
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Fetch Request</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="0">
+       <widget class="QFrame" name="frame_4">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QWidget" name="horizontalLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>20</y>
+           <width>461</width>
+           <height>59</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#000000;&quot;&gt;Date Range &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="1">
+             <widget class="QDateEdit" name="dateEdit_2">
+              <property name="displayFormat">
+               <string>MM/yyyy</string>
+              </property>
+              <property name="date">
+               <date>
+                <year>2021</year>
+                <month>1</month>
+                <day>1</day>
+               </date>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;From :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QDateEdit" name="dateEdit">
+              <property name="displayFormat">
+               <string>MM/yyyy</string>
+              </property>
+              <property name="date">
+               <date>
+                <year>2021</year>
+                <month>1</month>
+                <day>1</day>
+               </date>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;To :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <spacer name="verticalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="6" column="0">
+       <widget class="QFrame" name="frame_2">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QSplitter" name="splitter">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>407</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Police Forces :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+         <widget class="QgsCheckableComboBox" name="mComboBox">
+          <item>
+           <property name="text">
+            <string>Select All </string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Avon and Somerset Constabulary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Bedfordshire Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>British Transport Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Cambridgeshire Constabulary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Cheshire Constabulary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>City of London Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Cleveland Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Cumbria Constabulary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Derbyshire Constabulary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Devon and  Cornwall Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dorset Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Durham Constabulary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dyfed-Powys Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Essex Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Gloucestershire Constabulary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Greater Manchester Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Gwent Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Hampshire Constabulary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Hertfordshire Constabulary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Humberside Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Kent Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Lancashire Constabulary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Leicestershire Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Lincolnshire Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Merseyside Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Metropolitan Police Service</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Norfolk Constabulary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>North Wales Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>North Yorkshire Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Northamptonshire Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Northumbria Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Nottinghamshire Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Police Service of Northern Ireland</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>South Wales Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>South Yorkshire Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Staffordshire Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Suffolk Constabulary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Surrey Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Sussex Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Thames Valley Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Warwickshire Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>West Mercia Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>West Midlands Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>West Yorkshire Police</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Wiltshire Police</string>
+           </property>
+          </item>
+         </widget>
+        </widget>
+       </widget>
+      </item>
+      <item row="11" column="0">
+       <widget class="QFrame" name="frame_3">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>40</y>
+           <width>491</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QLineEdit" name="lineEdit">
+            <property name="accessibleName">
+             <string>fd</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="text">
+             <string>Browse</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="5" column="0">
     <widget class="QDialogButtonBox" name="OK">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>

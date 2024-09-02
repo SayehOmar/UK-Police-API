@@ -1,10 +1,107 @@
-class calculator:
-    def __init__(self, A, B):
-        self.A = A
-        self.B = B
-
-    def calcul(self):
-        return self.A + self.B
+import requests
+import csv
 
 
-# print('Hello Omar ')
+class PoliceDataFetcher:
+    def __init__(self, force, date=None):
+        self.force = force
+        self.date = date
+        self.url = f"https://data.police.uk/api/stops-force?force={self.force}"
+        if self.date:
+            self.url += f"&date={self.date}"
+
+    def fetch_data(self):
+        response = requests.get(self.url)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            raise Exception(f"Failed to fetch data: {response.status_code}")
+
+
+class CSVDataSaver:
+    def __init__(self, filename):
+        self.filename = filename
+        self.fieldnames = [
+            "type",
+            "involved_person",
+            "datetime",
+            "operation",
+            "operation_name",
+            "location",
+            "latitude",
+            "longitude",
+            "street_id",
+            "street_name",
+            "gender",
+            "age_range",
+            "self_defined_ethnicity",
+            "officer_defined_ethnicity",
+            "legislation",
+            "object_of_search",
+            "outcome",
+            "outcome_linked_to_object_of_search",
+            "removal_of_more_than_outer_clothing",
+        ]
+
+    def save_to_csv(self, data):
+        with open(self.filename, "w", newline="", encoding="utf-8") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=self.fieldnames)
+            writer.writeheader()
+            for item in data:
+                location = item.get("location", {})
+                street = location.get("street") if location else {}
+
+                writer.writerow(
+                    {
+                        "type": item.get("type"),
+                        "involved_person": item.get("involved_person"),
+                        "datetime": item.get("datetime"),
+                        "operation": item.get("operation"),
+                        "operation_name": item.get("operation_name"),
+                        "location": (
+                            f"{location.get('latitude', '')}, {location.get('longitude', '')}"
+                            if location
+                            else ""
+                        ),
+                        "latitude": location.get("latitude", "") if location else "",
+                        "longitude": location.get("longitude", "") if location else "",
+                        "street_id": street.get("id", "") if street else "",
+                        "street_name": street.get("name", "") if street else "",
+                        "gender": item.get("gender", ""),
+                        "age_range": item.get("age_range", ""),
+                        "self_defined_ethnicity": item.get(
+                            "self_defined_ethnicity", ""
+                        ),
+                        "officer_defined_ethnicity": item.get(
+                            "officer_defined_ethnicity", ""
+                        ),
+                        "legislation": item.get("legislation", ""),
+                        "object_of_search": item.get("object_of_search", ""),
+                        "outcome": item.get("outcome", ""),
+                        "outcome_linked_to_object_of_search": item.get(
+                            "outcome_linked_to_object_of_search", ""
+                        ),
+                        "removal_of_more_than_outer_clothing": item.get(
+                            "removal_of_more_than_outer_clothing", ""
+                        ),
+                    }
+                )
+
+
+"""# Main script
+if __name__ == "__main__":
+    # Define parameters
+    force_id = "suffolk"
+    date = "2022-01"
+    filename = "stop_and_search_data.csv"
+
+    # Fetch the data
+    fetcher = PoliceDataFetcher(force_id, date)
+    data = fetcher.fetch_data()
+
+    # Save the data to CSV
+    saver = CSVDataSaver(filename)
+    saver.save_to_csv(data)
+
+    print(f"Data saved to {filename}")
+"""

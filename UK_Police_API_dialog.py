@@ -23,7 +23,6 @@
 """
 
 import os
-from .Logic import calculator
 from qgis.PyQt import uic
 from qgis.PyQt import QtWidgets
 
@@ -44,18 +43,28 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
 
-        # self.BB_calcul.clicked.connect(self.on_calcul)
+    def get_end_date(self):
+        """Fetch the date from the QDateEdit widget."""
+        end_date_widget = self.findChild(QtWidgets.QDateEdit, "EndDate")
+        if end_date_widget:
+            # Retrieve the selected date from the widget
+            selected_date = end_date_widget.date()
+            # Convert to string if needed
+            return selected_date.toString("MM/yyyy")  # Format as YYYY-MM-DD
+        else:
+            raise Exception("QDateEdit widget 'EndDate' not found.")
+
+    def on_confirm_button_clicked(self):
+        """Slot method called when the ConfirmBtn is pressed."""
+        end_date = self.get_end_date()
+        print(f"End date: {end_date}")
 
 
-"""
-    def on_calcul(self):
-        # Get the values from the spin boxes
-        Value_A = self.SB1.value()
-        Value_B = self.SB2.value()
-        # Create an instance of the calculator class
-        calc = calculator(Value_A, Value_B)
-
-        # Call the calcul method to get the result
-        result = calc.calcul()
-        print(f"results:{result}")
-"""
+# Example usage
+if __name__ == "__main__":
+    app = QtWidgets.QApplication([])
+    dialog = UK_Police_APIDialog()
+    dialog.show()
+    end_date = dialog.get_end_date()
+    print(f"End date: {end_date}")
+    app.exec_()

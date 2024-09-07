@@ -74,11 +74,6 @@
            <widget class="QgsCheckableComboBox" name="mComboBox">
             <item>
              <property name="text">
-              <string>Select All </string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
               <string id="avon-and-somerset">Avon and Somerset Constabulary</string>
              </property>
             </item>

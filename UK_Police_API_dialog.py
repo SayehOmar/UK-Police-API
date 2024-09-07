@@ -25,10 +25,15 @@
 import os
 from qgis.PyQt import uic
 from qgis.PyQt import QtWidgets
+from qgis.gui import (
+    QgsCheckableComboBox,
+)
+from qgis.PyQt import QtCore, QtGui, QtWidgets
+
 
 # This loads your .ui file so that PyQt can populate your plugin with the elements from Qt Designer
 FORM_CLASS, _ = uic.loadUiType(
-    os.path.join(os.path.dirname(__file__), "UK Police API_dialog_base.ui")
+    os.path.join(os.path.dirname(__file__), "UK_Police_API_dialog_base.ui")
 )
 
 
@@ -43,6 +48,115 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
 
+        self.force_id_map = {
+            "Select All": "Select All",
+            "Avon and Somerset Constabulary": "avon-and-somerset",
+            "Bedfordshire Police": "bedfordshire",
+            "British Transport Police": "btp",
+            "Cambridgeshire Constabulary": "cambridgeshire",
+            "Cheshire Constabulary": "cheshire",
+            "City of London Police": "city-of-london",
+            "Cleveland Police": "cleveland",
+            "Cumbria Constabulary": "cumbria",
+            "Derbyshire Constabulary": "derbyshire",
+            "Devon and Cornwall Police": "devon-and-cornwall",
+            "Dorset Police": "dorset",
+            "Durham Constabulary": "durham",
+            "Dyfed-Powys Police": "dyfed-powys",
+            "Essex Police": "essex",
+            "Gloucestershire Constabulary": "gloucestershire",
+            "Greater Manchester Police": "greater-manchester",
+            "Gwent Police": "gwent",
+            "Hampshire Constabulary": "hampshire",
+            "Hertfordshire Constabulary": "hertfordshire",
+            "Humberside Police": "humberside",
+            "Kent Police": "kent",
+            "Lancashire Constabulary": "lancashire",
+            "Leicestershire Police": "leicestershire",
+            "Lincolnshire Police": "lincolnshire",
+            "Merseyside Police": "merseyside",
+            "Metropolitan Police Service": "metropolitan",
+            "Norfolk Constabulary": "norfolk",
+            "North Wales Police": "north-wales",
+            "North Yorkshire Police": "north-yorkshire",
+            "Northamptonshire Police": "northamptonshire",
+            "Northumbria Police": "northumbria",
+            "Nottinghamshire Police": "nottinghamshire",
+            "Police Service of Northern Ireland": "northern-ireland",
+            "South Wales Police": "south-wales",
+            "South Yorkshire Police": "south-yorkshire",
+            "Staffordshire Police": "staffordshire",
+            "Suffolk Constabulary": "suffolk",
+            "Surrey Police": "surrey",
+            "Sussex Police": "sussex",
+            "Thames Valley Police": "thames-valley",
+            "Warwickshire Police": "warwickshire",
+            "West Mercia Police": "west-mercia",
+            "West Midlands Police": "west-midlands",
+            "West Yorkshire Police": "west-yorkshire",
+            "Wiltshire Police": "wiltshire",
+        }
+
+        # Ensure that the combo box is a QgsCheckableComboBox and set up its items
+        self.setup_combo_box()
+
+        # Connect the QPushButton named FetchRequest to the method
+        self.FetchRequest.clicked.connect(self.on_fetch_request_clicked)
+
+    def setup_combo_box(self):
+        """Initialize the QgsCheckableComboBox with force names and the 'Select All' option."""
+        combo_box = self.findChild(QgsCheckableComboBox, "mComboBox")
+        if combo_box:
+            # Add 'Select All' option
+            combo_box.addItem("Select All", QtCore.Qt.Unchecked)
+
+            # Add items to the combobox with check states
+            for force_name in self.force_id_map.keys():
+                combo_box.addItem(force_name, QtCore.Qt.Unchecked)
+
+            # Connect the currentIndexChanged signal to handle the 'Select All' logic
+            combo_box.currentIndexChanged.connect(self.handle_selection_change)
+        else:
+            raise Exception("QgsCheckableComboBox widget 'mComboBox' not found.")
+
+    def handle_selection_change(self, index):
+        """Handle changes in the combobox selection."""
+        combo_box = self.findChild(QgsCheckableComboBox, "mComboBox")
+        if combo_box:
+            # Get the text of the selected item
+            selected_text = combo_box.itemText(index)
+
+            # Check if 'Select All' is selected
+            if selected_text == "Select All":
+                # Check or uncheck all items based on the current state of 'Select All'
+                check_all = not combo_box.isItemChecked(index)
+                for i in range(combo_box.count()):
+                    if i != index:  # Skip 'Select All' item itself
+                        combo_box.setItemChecked(i, check_all)
+                combo_box.setItemChecked(index, check_all)  # Update 'Select All' state
+            else:
+                # Ensure 'Select All' item is unchecked if any other item is changed
+                all_checked = all(
+                    combo_box.isItemChecked(i) for i in range(1, combo_box.count())
+                )
+                combo_box.setItemChecked(
+                    0, all_checked
+                )  # Ensure 'Select All' is unchecked
+
+    def get_selected_forces(self):
+        """Fetch the selected forces from the QgsCheckableComboBox."""
+        combo_box = self.findChild(QgsCheckableComboBox, "mComboBox")
+        if combo_box:
+            selected_forces = combo_box.checkedItems()  # Get the selected display names
+            selected_ids = [
+                self.force_id_map.get(force)
+                for force in selected_forces
+                if force in self.force_id_map
+            ]
+            return selected_ids
+        else:
+            raise Exception("QgsCheckableComboBox widget 'mComboBox' not found.")
+
     def get_end_date(self):
         """Fetch the date from the QDateEdit widget."""
         end_date_widget = self.findChild(QtWidgets.QDateEdit, "EndDate")
@@ -54,10 +168,30 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
         else:
             raise Exception("QDateEdit widget 'EndDate' not found.")
 
-    def on_confirm_button_clicked(self):
-        """Slot method called when the ConfirmBtn is pressed."""
+    def get_start_date(self):
+        """Fetch the date from the QDateEdit widget."""
+        start_date_widget = self.findChild(QtWidgets.QDateEdit, "StartDate")
+        if start_date_widget:
+            # Retrieve the selected date from the widget
+            selected_date = start_date_widget.date()
+            # Convert to string if needed
+            return selected_date.toString("MM/yyyy")  # Format as YYYY-MM-DD
+        else:
+            raise Exception("QDateEdit widget 'StartDate' not found.")
+
+    def on_fetch_request_clicked(self):
+        """Slot method executed when FetchRequest button is clicked."""
+        start_date = self.get_start_date()
+        print(f"start date: {start_date}")
+        ############################
         end_date = self.get_end_date()
         print(f"End date: {end_date}")
+        ############################
+        selected_forces = self.get_selected_forces()
+        print(f"Selected forces: {selected_forces}")
+
+        # Here you can add the logic to fetch data, send requests, or perform any other operation
+        # For example, you can integrate the data fetching logic here.
 
 
 # Example usage
@@ -65,6 +199,4 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     dialog = UK_Police_APIDialog()
     dialog.show()
-    end_date = dialog.get_end_date()
-    print(f"End date: {end_date}")
     app.exec_()

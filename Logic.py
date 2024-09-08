@@ -1,21 +1,41 @@
 import requests
 import csv
+from datetime import datetime
+
+
+def convert_date_format(date_str):
+    try:
+        # Convert 'MM/YYYY' to 'YYYY-MM'
+        date_obj = datetime.strptime(date_str, "%m/%Y")
+        return date_obj.strftime("%Y-%m")
+    except ValueError:
+        raise ValueError(f"Incorrect date format: {date_str}. Expected MM/YYYY.")
 
 
 class PoliceDataFetcher:
-    def __init__(self, force, date=None):
+    def __init__(self, force, start_date=None, end_date=None):
         self.force = force
-        self.date = date
+        self.start_date = start_date
+        self.end_date = end_date
         self.url = f"https://data.police.uk/api/stops-force?force={self.force}"
-        if self.date:
-            self.url += f"&date={self.date}"
+        if self.start_date:
+            self.url += f"&start_date={self.start_date}"
+        if self.end_date:
+            self.url += f"&end_date={self.end_date}"
 
     def fetch_data(self):
-        response = requests.get(self.url)
-        if response.status_code == 200:
+        try:
+            response = requests.get(self.url)
+            response.raise_for_status()
             return response.json()
-        else:
-            raise Exception(f"Failed to fetch data: {response.status_code}")
+        except requests.exceptions.HTTPError as http_err:
+            if response.status_code == 502:
+                # Handle 502 Bad Gateway error
+                raise Exception(f"HTTP error occurred: {http_err}")
+            else:
+                raise Exception(f"HTTP error occurred: {http_err}")
+        except Exception as err:
+            raise Exception(f"Other error occurred: {err}")
 
 
 class CSVDataSaver:

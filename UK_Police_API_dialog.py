@@ -29,6 +29,7 @@ from qgis.gui import (
     QgsCheckableComboBox,
 )
 from qgis.PyQt import QtCore, QtGui, QtWidgets
+from .Logic import PoliceDataFetcher, CSVDataSaver, convert_date_format
 
 
 # This loads your .ui file so that PyQt can populate your plugin with the elements from Qt Designer
@@ -49,7 +50,7 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
         self.setupUi(self)
 
         self.force_id_map = {
-            "Select All": "Select All",
+            # "Select All": "Select All",
             "Avon and Somerset Constabulary": "avon-and-somerset",
             "Bedfordshire Police": "bedfordshire",
             "British Transport Police": "btp",
@@ -100,6 +101,9 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
         # Ensure that the combo box is a QgsCheckableComboBox and set up its items
         self.setup_combo_box()
 
+        # Connect the QPushButton named BrowserBtn to the method
+        self.BrowserBtn.clicked.connect(self.open_file_dialog)
+
         # Connect the QPushButton named FetchRequest to the method
         self.FetchRequest.clicked.connect(self.on_fetch_request_clicked)
 
@@ -137,7 +141,7 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
             else:
                 # Ensure 'Select All' item is unchecked if any other item is changed
                 all_checked = all(
-                    combo_box.isItemChecked(i) for i in range(1, combo_box.count())
+                    # combo_box.isItemChecked(i) for i in range(1, combo_box.count())
                 )
                 combo_box.setItemChecked(
                     0, all_checked
@@ -192,6 +196,98 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
 
         # Here you can add the logic to fetch data, send requests, or perform any other operation
         # For example, you can integrate the data fetching logic here.
+
+    # Example function to handle the fetch request
+    def fetch_data_and_save(self):
+        start_date = self.startDateEdit.text()  # Assuming 'MM/YYYY'
+        end_date = self.endDateEdit.text()  # Assuming 'MM/YYYY'
+
+        # Convert dates to the format needed by the API
+        formatted_start_date = convert_date_format(start_date)
+        formatted_end_date = convert_date_format(end_date)
+
+        # Fetch the data
+        fetcher = PoliceDataFetcher(
+            self.selected_force, formatted_start_date, formatted_end_date
+        )
+        try:
+            data = fetcher.fetch_data()
+
+            # Save the data to CSV
+            saver = CSVDataSaver(self.folderPathEdit.text())
+            saver.save_to_csv(data)
+
+            print(f"Data saved to {self.folderPathEdit.text()}")
+        except Exception as e:
+            print(e)
+            # Handle errors as needed
+
+    def open_file_dialog(self):
+        """Open a file dialog to select a path and set it in the QLineEdit."""
+        options = QtWidgets.QFileDialog.Options()
+        file_path, _ = QtWidgets.QFileDialog.getSaveFileName(
+            self,
+            "Save CSV File",
+            "stop_and_search_data.csv",
+            "CSV Files (*.csv);;All Files (*)",
+            options=options,
+        )
+        if file_path:
+            # Set the selected file path to the QLineEdit named FolderPath
+            self.FolderPath.setText(file_path)
+
+    def on_fetch_request_clicked(self):
+        """Slot method executed when FetchRequest button is clicked."""
+        # Get selected dates and forces
+        start_date = self.get_start_date()
+        end_date = self.get_end_date()
+        selected_forces = self.get_selected_forces()
+        save_path = self.FolderPath.text()  # Path where to save the CSV
+
+        if not selected_forces:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "No Forces Selected",
+                "Please select at least one police force.",
+            )
+            return
+
+        if not save_path:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "No Save Path",
+                "Please specify a folder path where to save the CSV file.",
+            )
+            return
+
+        # Iterate through selected forces and fetch data
+        for force in selected_forces:
+            # Create fetcher instance
+            fetcher = PoliceDataFetcher(force, start_date)
+            try:
+                # Fetch data from API
+                data = fetcher.fetch_data()
+
+                # Construct filename
+                filename = os.path.join(save_path, f"{force}_stop_and_search_data.csv")
+
+                # Create saver instance
+                saver = CSVDataSaver(filename)
+
+                # Save data to CSV
+                saver.save_to_csv(data)
+
+                # Notify user of success
+                print(f"Data for {force} saved to {filename}")
+
+            except Exception as e:
+                # Notify user of any errors
+                print(f"Failed to fetch or save data for {force}: {e}")
+                QtWidgets.QMessageBox.critical(
+                    self,
+                    "Error",
+                    f"Failed to fetch or save data for {force}: {e}",
+                )
 
 
 # Example usage

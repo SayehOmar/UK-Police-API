@@ -1,6 +1,7 @@
 import requests
 import csv
 from datetime import datetime
+import os
 
 
 def convert_date_format(date_str):
@@ -62,6 +63,14 @@ class CSVDataSaver:
             "outcome_linked_to_object_of_search",
             "removal_of_more_than_outer_clothing",
         ]
+
+    def save_to_csv(self, data):
+        # Extract folder path from filename
+        folder_path = os.path.dirname(self.filename)
+
+        # Check if the folder exists; if not, create it
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
 
     def save_to_csv(self, data):
         with open(self.filename, "w", newline="", encoding="utf-8") as csvfile:

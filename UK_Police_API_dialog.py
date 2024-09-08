@@ -23,6 +23,8 @@
 """
 
 import os
+
+from .map_plotter import MapPlotter
 from qgis.PyQt import uic
 from qgis.PyQt import QtWidgets
 from qgis.gui import (
@@ -107,22 +109,6 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
         # Connect the QPushButton named FetchRequest to the method
         self.FetchRequest.clicked.connect(self.on_fetch_request_clicked)
 
-    def setup_combo_box(self):
-        """Initialize the QgsCheckableComboBox with force names and the 'Select All' option."""
-        combo_box = self.findChild(QgsCheckableComboBox, "mComboBox")
-        if combo_box:
-            # Add 'Select All' option
-            combo_box.addItem("Select All", QtCore.Qt.Unchecked)
-
-            # Add items to the combobox with check states
-            for force_name in self.force_id_map.keys():
-                combo_box.addItem(force_name, QtCore.Qt.Unchecked)
-
-            # Connect the currentIndexChanged signal to handle the 'Select All' logic
-            combo_box.currentIndexChanged.connect(self.handle_selection_change)
-        else:
-            raise Exception("QgsCheckableComboBox widget 'mComboBox' not found.")
-
     def handle_selection_change(self, index):
         """Handle changes in the combobox selection."""
         combo_box = self.findChild(QgsCheckableComboBox, "mComboBox")
@@ -138,14 +124,22 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
                     if i != index:  # Skip 'Select All' item itself
                         combo_box.setItemChecked(i, check_all)
                 combo_box.setItemChecked(index, check_all)  # Update 'Select All' state
-            else:
-                # Ensure 'Select All' item is unchecked if any other item is changed
-                all_checked = all(
-                    # combo_box.isItemChecked(i) for i in range(1, combo_box.count())
-                )
-                combo_box.setItemChecked(
-                    0, all_checked
-                )  # Ensure 'Select All' is unchecked
+
+    def setup_combo_box(self):
+        """Initialize the QgsCheckableComboBox with force names and the 'Select All' option."""
+        combo_box = self.findChild(QgsCheckableComboBox, "mComboBox")
+        if combo_box:
+            # Add 'Select All' option
+            combo_box.addItem("Select All", QtCore.Qt.Unchecked)
+
+            # Add items to the combobox with check states
+            for force_name in self.force_id_map.keys():
+                combo_box.addItem(force_name, QtCore.Qt.Unchecked)
+
+            # Connect the currentIndexChanged signal to handle the 'Select All' logic
+            combo_box.currentIndexChanged.connect(self.handle_selection_change)
+        else:
+            raise Exception("QgsCheckableComboBox widget 'mComboBox' not found.")
 
     def get_selected_forces(self):
         """Fetch the selected forces from the QgsCheckableComboBox."""
@@ -223,18 +217,17 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
             # Handle errors as needed
 
     def open_file_dialog(self):
-        """Open a file dialog to select a path and set it in the QLineEdit."""
+        """Open a file dialog to select a folder and set it in the QLineEdit."""
         options = QtWidgets.QFileDialog.Options()
-        file_path, _ = QtWidgets.QFileDialog.getSaveFileName(
+        folder_path = QtWidgets.QFileDialog.getExistingDirectory(
             self,
-            "Save CSV File",
-            "stop_and_search_data.csv",
-            "CSV Files (*.csv);;All Files (*)",
+            "Select Folder",
+            "",
             options=options,
         )
-        if file_path:
-            # Set the selected file path to the QLineEdit named FolderPath
-            self.FolderPath.setText(file_path)
+        if folder_path:
+            # Set the selected folder path to the QLineEdit named FolderPath
+            self.FolderPath.setText(folder_path)
 
     def on_fetch_request_clicked(self):
         """Slot method executed when FetchRequest button is clicked."""
@@ -263,10 +256,18 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
         # Iterate through selected forces and fetch data
         for force in selected_forces:
             # Create fetcher instance
-            fetcher = PoliceDataFetcher(force, start_date)
+            fetcher = PoliceDataFetcher(force, start_date, end_date)
             try:
                 # Fetch data from API
                 data = fetcher.fetch_data()
+
+                if data is None:
+                    QtWidgets.QMessageBox.warning(
+                        self,
+                        "No Data",
+                        f"No data available for {force}.",
+                    )
+                    continue  # Skip to the next force
 
                 # Construct filename
                 filename = os.path.join(save_path, f"{force}_stop_and_search_data.csv")
@@ -280,8 +281,21 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
                 # Notify user of success
                 print(f"Data for {force} saved to {filename}")
 
+                # Plot data from CSV
+                try:
+                    map_plotter = MapPlotter(f"Police Stop and Search Data - {force}")
+                    map_plotter.plot_data_from_csv(filename)
+                    print(f"Data from {filename} plotted successfully.")
+                except Exception as e:
+                    print(f"Failed to plot data from CSV1: {e}")
+                    QtWidgets.QMessageBox.critical(
+                        self,
+                        "Plotting Error",
+                        f"Failed to plot data from CSV2: {e}",
+                    )
+
             except Exception as e:
-                # Notify user of any errors
+                # Notify user of any errors during fetching or saving
                 print(f"Failed to fetch or save data for {force}: {e}")
                 QtWidgets.QMessageBox.critical(
                     self,

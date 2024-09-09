@@ -1,32 +1,53 @@
-Plugin Builder Results
+# UK Police API Plugin for QGIS
 
-Your plugin UK_Police_API was created in:
-    C:/Users/sayeh omar/Documents/GitHub/UK_crimes_Analysis/Plugin\uk police api
+**UK Police API** is a QGIS plugin that connects to the UK Police API, allowing users to fetch and visualize stop and search data directly within QGIS.
 
-Your QGIS plugin directory is located at:
-    C:/Users/sayeh omar/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins
+## Features
+- Fetch stop and search data from the UK Police API.
+- Plot data points on a map within QGIS.
+- Filter data by specific dates and forces.
+- Save fetched data as a CSV file.
+- Visualize data interactively in QGIS with custom attributes.
 
-What's Next:
+---
 
-  * Copy the entire directory containing your new plugin to the QGIS plugin
-    directory
+## How It Works
 
-  * Compile the resources file using pyrcc5
+### 1. Fetching Data
+- Select a date range and police forces from the plugin interface.
+- Click the **Fetch Request** button to download data from the UK Police API.
+- The data is saved as a CSV file in the directory you specify.
 
-  * Run the tests (``make test``)
+### 2. Visualizing Data
+- The fetched data is plotted on the QGIS canvas as point layers.
+- The plugin uses the data's latitude and longitude to plot stop and search locations.
 
-  * Test the plugin by enabling it in the QGIS plugin manager
+### Screenshots / Video Demos
+- How the Plugin works 
+[Demo](Media\Demo.mp4)
+-The Fetched Data in attributes tables format 
+![attributes tables](Media\img1.png)
+-How the GUI was created 
+![attributes tables](Media\img2.png)
 
-  * Customize it by editing the implementation file: ``UK Police API.py``
 
-  * Create your own custom icon, replacing the default icon.png
+---
 
-  * Modify your user interface by opening UK_Police_API_dialog_base.ui in Qt Designer
+## Installation
 
-  * You can use the Makefile to compile your Ui and resource files when
-    you make changes. This requires GNU make (gmake)
+### QGIS Plugin Manager Installation
+1. Clone this repository or download the ZIP file.
+2. Extract the plugin folder (e.g., `uk_police_api`) to the following directory:
+   - **Windows**: `C:/Users/<your_username>/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/`
+   - **Linux**: `~/.local/share/QGIS/QGIS3/profiles/default/python/plugins/`
+   - **Mac**: `/Users/<your_username>/Library/Application Support/QGIS/QGIS3/profiles/default/python/plugins/`
+3. Restart QGIS.
+4. In QGIS, go to **Plugins > Manage and Install Plugins**.
+5. Enable the **UK Police API** plugin from the list.
 
-For more information, see the PyQGIS Developer Cookbook at:
-http://www.qgis.org/pyqgis-cookbook/index.html
-
-(C) 2011-2018 GeoApt LLC - geoapt.com
+### Manual Installation (Development)
+To compile resources manually:
+1. Navigate to the plugin directory.
+2. Run the following command to compile the resources:
+   ```bash
+   pyrcc5 -o resources.py resources.qrc

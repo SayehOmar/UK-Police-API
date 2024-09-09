@@ -298,7 +298,7 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
                     QtWidgets.QMessageBox.critical(
                         self,
                         "Plotting Error",
-                        f"Failed to plot data from CSV of {force}: {e}",
+                        f"Failed to plot data from CSV of {force} : {e}",
                     )
 
             except Exception as e:

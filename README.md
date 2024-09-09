@@ -26,7 +26,9 @@
 
 - How the Plugin works : 
 
-[![Watch the demo video](https://img.youtube.com/vi/6jBTfaD5TbM/0.jpg)](https://youtu.be/6jBTfaD5TbM)
+[![Watch the demo video](Media/thumbnail.png)](https://github.com/SayehOmar/UK-Police-API/raw/main/Media/Demo.mp4)
+
+
 
 -The Fetched Data in attributes tables format :
 

@@ -252,9 +252,11 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
                 "Please specify a folder path where to save the CSV file.",
             )
             return
+        total_forces = len(selected_forces)
+        self.progressBar.setValue(0)  # Reset the progress bar to 0
 
         # Iterate through selected forces and fetch data
-        for force in selected_forces:
+        for index, force in enumerate(selected_forces):
             # Create fetcher instance
             fetcher = PoliceDataFetcher(force, start_date, end_date)
             try:
@@ -281,17 +283,22 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
                 # Notify user of success
                 print(f"Data for {force} saved to {filename}")
 
+                # Update the progress bar
+                progress_percentage = int(((index + 1) / total_forces) * 100)
+                self.progressBar.setValue(progress_percentage)
+                QtWidgets.QApplication.processEvents()  # Ensure UI updates in real time
+
                 # Plot data from CSV
                 try:
                     map_plotter = MapPlotter(f"Police Stop and Search Data - {force}")
                     map_plotter.plot_data_from_csv(filename)
                     print(f"Data from {filename} plotted successfully.")
                 except Exception as e:
-                    print(f"Failed to plot data from CSV1: {e}")
+                    print(f"Failed to plot data from CSV: {e}")
                     QtWidgets.QMessageBox.critical(
                         self,
                         "Plotting Error",
-                        f"Failed to plot data from CSV2: {e}",
+                        f"Failed to plot data from CSV of {force}: {e}",
                     )
 
             except Exception as e:
@@ -302,6 +309,9 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
                     "Error",
                     f"Failed to fetch or save data for {force}: {e}",
                 )
+        # Set progress to 100 when the operation is completed
+        self.progressBar.setValue(100)
+        self.progressBar.setValue(0)  # Reset the progress bar to 0
 
 
 # Example usage

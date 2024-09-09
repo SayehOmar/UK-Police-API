@@ -26,7 +26,7 @@
 
 - How the Plugin works : 
 
-[[Watch the demo video](https://img.youtube.com/vi/6jBTfaD5TbM/0.jpg)](https://youtu.be/6jBTfaD5TbM)
+[![Watch the demo video](https://img.youtube.com/vi/6jBTfaD5TbM/0.jpg)](https://youtu.be/6jBTfaD5TbM)
 
 -The Fetched Data in attributes tables format :
 

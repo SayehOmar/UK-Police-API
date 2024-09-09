@@ -23,12 +23,18 @@
 - The plugin uses the data's latitude and longitude to plot stop and search locations.
 
 ### Screenshots / Video Demos
-- How the Plugin works 
-[Demo](Media\Demo.mp4)
--The Fetched Data in attributes tables format 
-![attributes tables](Media\img1.png)
--How the GUI was created 
-![attributes tables](Media\img2.png)
+
+- How the Plugin works : 
+
+[Demo](Media/Demo.mp4)
+
+-The Fetched Data in attributes tables format :
+
+![attributes tables](Media/img1.png)
+
+-How the GUI was created :
+
+![attributes tables](Media/img2.png)
 
 
 ---

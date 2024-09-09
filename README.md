@@ -26,7 +26,7 @@
 
 - How the Plugin works : 
 
-[![Watch the demo video](Media/thumbnail.png)](https://github.com/SayehOmar/UK-Police-API/raw/main/Media/Demo.mp4)
+[![Watch the demo video]](https://github.com/SayehOmar/UK-Police-API/raw/main/Media/Demo.mp4)
 
 
 

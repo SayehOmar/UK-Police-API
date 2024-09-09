@@ -26,8 +26,10 @@
 
 - How the Plugin works : 
 
-[![Watch the demo video]](https://github.com/SayehOmar/UK-Police-API/raw/main/Media/Demo.mp4)
-
+<video width="600" controls>
+    <source src="https://github.com/SayehOmar/UK-Police-API/raw/main/Media/Demo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
 
 -The Fetched Data in attributes tables format :

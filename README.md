@@ -26,11 +26,7 @@
 
 - How the Plugin works : 
 
-<video width="600" controls>
-    <source src="https://github.com/SayehOmar/UK-Police-API/raw/main/Media/Demo.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-
+[![Watch the Plugin Demo on LinkedIn](Media/linkedin_post_screenshot.png)](https://www.linkedin.com/posts/omar-sayeh-a0277b209_qgis-python-geospatialanalysis-activity-7240068282202918913-PL_g?utm_source=share&utm_medium=member_desktop)
 
 -The Fetched Data in attributes tables format :
 

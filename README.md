@@ -26,7 +26,7 @@
 
 - How the Plugin works : 
 
-[![Watch the Plugin Demo on LinkedIn](Media/linkedin_post_screenshot.png)](https://www.linkedin.com/posts/omar-sayeh-a0277b209_qgis-python-geospatialanalysis-activity-7240068282202918913-PL_g?utm_source=share&utm_medium=member_desktop)
+[![Watch the Plugin Demo on LinkedIn](Media/img3.png)](https://www.linkedin.com/posts/omar-sayeh-a0277b209_qgis-python-geospatialanalysis-activity-7240068282202918913-PL_g?utm_source=share&utm_medium=member_desktop)
 
 -The Fetched Data in attributes tables format :
 

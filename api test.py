@@ -83,7 +83,7 @@ def save_to_csv(data, filename):
 
 # Example usage
 force_id = "suffolk"
-date = "2022-01"
+date = "2024-01"
 filename = "stop_and_search_data.csv"
 
 # Fetch the data

@@ -1,6 +1,7 @@
 import requests
 import csv
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 import os
 
 
@@ -16,27 +17,33 @@ def convert_date_format(date_str):
 class PoliceDataFetcher:
     def __init__(self, force, start_date=None, end_date=None):
         self.force = force
-        self.start_date = start_date
-        self.end_date = end_date
-        self.url = f"https://data.police.uk/api/stops-force?force={self.force}"
-        if self.start_date:
-            self.url += f"&start_date={self.start_date}"
-        if self.end_date:
-            self.url += f"&end_date={self.end_date}"
+        self.start_date = datetime.strptime(start_date, "%m/%Y")
+        self.end_date = datetime.strptime(end_date, "%m/%Y")
+
+        if self.start_date > self.end_date:
+            raise ValueError("Start date must be earlier than end date.")
 
     def fetch_data(self):
-        try:
-            response = requests.get(self.url)
-            response.raise_for_status()
-            return response.json()
-        except requests.exceptions.HTTPError as http_err:
-            if response.status_code == 502:
-                # Handle 502 Bad Gateway error
-                raise Exception(f"HTTP error occurred: {http_err}")
-            else:
-                raise Exception(f"HTTP error occurred: {http_err}")
-        except Exception as err:
-            raise Exception(f"Other error occurred: {err}")
+        current_date = self.start_date
+        all_data = []
+
+        while current_date <= self.end_date:
+            formatted_date = current_date.strftime("%Y-%m")
+            url = f"https://data.police.uk/api/stops-force?date={formatted_date}&force={self.force}"
+
+            try:
+                response = requests.get(url)
+                response.raise_for_status()
+                data = response.json()
+                all_data.extend(data)
+                print(f"Fetched {len(data)} records for {formatted_date}.")
+            except requests.exceptions.RequestException as e:
+                print(f"Failed to fetch data for {formatted_date}: {e}")
+
+            # Increment by one month
+            current_date += relativedelta(months=1)
+
+        return all_data
 
 
 class CSVDataSaver:

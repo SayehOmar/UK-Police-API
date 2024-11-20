@@ -271,8 +271,18 @@ class UK_Police_APIDialog(QtWidgets.QDialog, FORM_CLASS):
                     )
                     continue  # Skip to the next force
 
+                    # Construct subdirectory path
+                subdirectory = os.path.join(
+                    save_path,
+                    f"{force}_stop_and_search_data from_{start_date.replace('/', '_')}_to_{end_date.replace('/', '_')}",
+                )
+                # Ensure subdirectory exists
+                if not os.path.exists(subdirectory):
+                    os.makedirs(subdirectory)
+
                 # Construct filename
-                filename = os.path.join(save_path, f"{force}_stop_and_search_data.csv")
+
+                filename = os.path.join(subdirectory, "data.csv")
 
                 # Create saver instance
                 saver = CSVDataSaver(filename)
